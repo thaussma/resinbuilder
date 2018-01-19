@@ -1,0 +1,14 @@
+dist: trusty
+sudo: required
+
+services:
+  - docker
+
+git:
+  depth: 3
+
+before_install:
+  - ./builder/build-docker.sh
+
+script:
+  - docker run -v $PWD:/resinbuilder --privileged -t resinbuilder /bin/bash build.sh

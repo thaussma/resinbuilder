@@ -1,0 +1,2 @@
+# Ignore everything but the build script
+!build.sh
