@@ -1,0 +1,25 @@
+dist: trusty
+sudo: required
+
+services:
+  - docker
+
+git:
+  depth: 3
+
+before_install:
+  - docker build -t resinbuilder builder
+  - docker run resinbuilder /bin/bash
+  - git clone --recursive --depth 1 https://github.com/resin-os/resin-raspberrypi
+
+script:
+  - ./resin-raspberrypi/resin-yocto-scripts/build/barys -r --shared-downloads $(pwd)/shared-downloads/ --shared-sstate $(pwd)/shared-sstate/ -m raspberrypi3
+
+
+# deploy:
+#   provider: releases
+#   api_key: "GITHUB OAUTH TOKEN"
+#   file: "FILE TO UPLOAD"
+#   skip_cleanup: true
+#   on:
+#     tags: true
