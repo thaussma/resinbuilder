@@ -1,0 +1,31 @@
+dist: trusty
+sudo: required
+
+services:
+  - docker
+
+git:
+  depth: 3
+
+before_install:
+  # - id
+  # - groups
+  # - sudo apt-get update
+  # - git --version
+  # - sudo apt-cache policy git
+  # - sudo apt-get install -y gawk wget diffstat unzip texinfo gcc-multilib build-essential chrpath socat cpio python python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping curl dosfstools mtools parted syslinux tree docker-ce nodejs npm
+  # - sudo apt-cache policy git
+  # - sudo apt-get remove git git-man
+  # - sudo apt-get install git=1:1.9.1-1ubuntu0.7 git-man=1:1.9.1-1ubuntu0.7
+  # - sudo curl -sfL https://balena.io/install.sh | sh
+  # - sudo groupadd docker || true
+  # - sudo groupadd balena || true
+  # - sudo usermod -aG docker $USER || true
+  # - sudo usermod -aG balena $USER || true
+  # - sudo bash -c 'balenad&'
+  # - git clone --recursive --depth 1 https://github.com/resin-os/resin-raspberrypi
+  # - cd resin-raspberrypi
+  - ./builder/build-docker.sh
+
+script:
+  - docker run -v $PWD:/resinbuilder --privileged -t resinbuilder /bin/bash build.sh
